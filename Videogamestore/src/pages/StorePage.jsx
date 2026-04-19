@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { getMenuItems } from "@/api/restaurants"
 import MenuItemCard from "@/components/MenuItemCard"
 
-function RestaurantPage() {
+function StorePage() {
   const [menuItems, setMenuItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -36,4 +36,4 @@ function RestaurantPage() {
   )
 }
 
-export default RestaurantPage
+export default StorePage

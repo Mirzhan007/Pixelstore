@@ -12,7 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { ArrowLeft } from "lucide-react"
 
-function MenuItemDetailPage() {
+function GameItemDetailPage() {
   // STUDENT TODO:
   // 1. Get the 'id' from the URL using useParams()
   // 2. Create state for the menuItem, loading, and error
@@ -32,4 +32,4 @@ function MenuItemDetailPage() {
   )
 }
 
-export default MenuItemDetailPage
+export default GameItemDetailPage

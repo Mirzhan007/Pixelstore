@@ -37,8 +37,8 @@ foodora-min-frontend/
 │   ├── api/
 │   │   └── restaurants.js           <- API-Layer (Axios)
 │   ├── pages/
-│   │   ├── RestaurantPage.jsx       <- Speisekarte als Grid
-│   │   └── MenuItemDetailPage.jsx   <- DEINE AUFGABE
+│   │   ├── StorePage.jsx       <- Speisekarte als Grid
+│   │   └── GameItemDetailPage.jsx   <- DEINE AUFGABE
 │   └── components/
 │       ├── ui/                      <- shadcn + eigene UI-Komponenten
 │       ├── AppSidebar.jsx           <- Seitenleiste
@@ -50,7 +50,7 @@ foodora-min-frontend/
 
 Am Ende dieses Tutorials fehlen zwei Dinge, die **du** als Aufgabe implementierst:
 1. Die Funktion `getMenuItemById(id)` im API-Layer
-2. Die `MenuItemDetailPage`, die Detailseite eines Menüpunkts
+2. Die `GameItemDetailPage`, die Detailseite eines Menüpunkts
 
 ---
 
@@ -359,8 +359,8 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router"
 import App from "./App"
-import RestaurantPage from "./pages/RestaurantPage"
-import MenuItemDetailPage from "./pages/MenuItemDetailPage"
+import StorePage from "./pages/StorePage"
+import GameItemDetailPage from "./pages/GameItemDetailPage"
 import "./index.css"
 
 const router = createBrowserRouter([
@@ -368,8 +368,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <RestaurantPage /> },
-      { path: "menu-items/:id", element: <MenuItemDetailPage /> },
+      { index: true, element: <StorePage /> },
+      { path: "menu-items/:id", element: <GameItemDetailPage /> },
     ],
   },
 ])
@@ -385,8 +385,8 @@ createRoot(document.getElementById("root")).render(
 
 | URL | Komponente | Beschreibung |
 |-----|-----------|-------------|
-| `/` | `<RestaurantPage />` | Startseite mit Speisekarte |
-| `/menu-items/3` | `<MenuItemDetailPage />` | Detail eines Menüpunkts (`:id` = 3) |
+| `/` | `<StorePage />` | Startseite mit Speisekarte |
+| `/menu-items/3` | `<GameItemDetailPage />` | Detail eines Menüpunkts (`:id` = 3) |
 
 1. `<App />` ist das **Layout** (Sidebar + TopNav), das immer sichtbar bleibt
 2. `<Outlet />` in App.jsx rendert die jeweilige Seite je nach URL
@@ -824,7 +824,7 @@ export default App
     <TopNav />                     <- Obere Leiste mit Toggle-Button
     <main>
       <Outlet />                   <- HIER wird die aktuelle Seite eingesetzt
-    </main>                            (RestaurantPage oder MenuItemDetailPage)
+    </main>                            (StorePage oder GameItemDetailPage)
   </div>
 </SidebarProvider>
 ```
@@ -836,7 +836,7 @@ export default App
 | `useState` | `const [sidebarOpen, setSidebarOpen] = useState(true)` | Sidebar-Sichtbarkeit im State speichern |
 | Conditional Rendering | `{sidebarOpen && <AppSidebar />}` | Sidebar nur rendern wenn `sidebarOpen === true` |
 | Callback als Prop | `onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}` | TopNav kann den Sidebar-State umschalten |
-| `<Outlet />` | React Router rendert hier die aktuelle Seite | Je nach URL: RestaurantPage oder MenuItemDetailPage |
+| `<Outlet />` | React Router rendert hier die aktuelle Seite | Je nach URL: StorePage oder GameItemDetailPage |
 
 ---
 
@@ -908,7 +908,7 @@ export async function getMenuItemById(id) {
 
 ## Schritt 13: Wiederverwendbare Komponente
 
-Eine **Komponente** in React ist wie ein Puzzle-Teil: einmal gebaut, überall wiederverwendbar. `MenuItemCard` zeigt eine einzelne Pizza-Karte. Sie wird auf der RestaurantPage für jeden Menüpunkt verwendet.
+Eine **Komponente** in React ist wie ein Puzzle-Teil: einmal gebaut, überall wiederverwendbar. `MenuItemCard` zeigt eine einzelne Pizza-Karte. Sie wird auf der StorePage für jeden Menüpunkt verwendet.
 
 ### src/components/MenuItemCard.jsx
 
@@ -965,14 +965,14 @@ export default MenuItemCard
 
 Die Hauptseite lädt die Menüpunkte vom API-Layer und zeigt sie als responsives Grid an.
 
-### src/pages/RestaurantPage.jsx
+### src/pages/StorePage.jsx
 
 ```jsx
 import { useState, useEffect } from "react"
 import { getMenuItems } from "@/api/restaurants"
 import MenuItemCard from "@/components/MenuItemCard"
 
-function RestaurantPage() {
+function StorePage() {
   const [menuItems, setMenuItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -1006,7 +1006,7 @@ function RestaurantPage() {
   )
 }
 
-export default RestaurantPage
+export default StorePage
 ```
 
 ### Was passiert hier?
@@ -1105,7 +1105,7 @@ export async function getMenuItemById(id) {
 
 ### Teil 2: Detail-Seite implementieren
 
-Öffne `src/pages/MenuItemDetailPage.jsx` und ersetze den TODO-Bereich:
+Öffne `src/pages/GameItemDetailPage.jsx` und ersetze den TODO-Bereich:
 
 **Was du brauchst:**
 1. **`useParams()`**: liest `:id` aus der URL (`/menu-items/3` -> `id = "3"`)
