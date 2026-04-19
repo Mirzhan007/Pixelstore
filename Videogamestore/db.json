@@ -1,17 +1,26 @@
 {
-  "restaurants": [
+  "games": [
     {
-      "id": 1,
-      "name": "Spenger Pizza",
-      "address": { "street": "Spengergasse 1", "postalCode": "1050", "city": "Wien" }
+      "id": "1",
+      "title": "The Legend of Zelda",
+      "genre": "Adventure",
+      "price": 59.99,
+      "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&q=80"
+    },
+    {
+      "id": "2",
+      "title": "Cyberpunk 2077",
+      "genre": "RPG",
+      "price": 49.99,
+      "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=500&q=80"
+    },
+    {
+      "id": "3",
+      "title": "Mario Kart 8",
+      "genre": "Racing",
+      "price": 49.99,
+      "image": "https://images.unsplash.com/photo-1585620385456-4759f9b5c7d9?w=500&q=80"
     }
   ],
-  "menu-items": [
-    { "id": 1, "name": "Margherita", "price": 8.90, "description": "Classic tomato sauce, mozzarella, fresh basil", "image": "/images/margherita.jpg", "restaurantId": 1 },
-    { "id": 2, "name": "Salami", "price": 10.40, "description": "Spicy Italian salami, mozzarella, tomato sauce", "image": "/images/salami.jpg", "restaurantId": 1 },
-    { "id": 3, "name": "Funghi", "price": 11.20, "description": "Mixed mushrooms, garlic, mozzarella, truffle oil", "image": "/images/funghi.jpg", "restaurantId": 1 },
-    { "id": 4, "name": "Quattro Formaggi", "price": 13.00, "description": "Mozzarella, gorgonzola, parmesan, fontina", "image": "/images/quattro-formaggi.jpg", "restaurantId": 1 },
-    { "id": 5, "name": "Diavola", "price": 11.90, "description": "Spicy nduja, fresh chilli, mozzarella", "image": "/images/diavola.jpg", "restaurantId": 1 },
-    { "id": 6, "name": "Prosciutto", "price": 12.50, "description": "Parma ham, arugula, parmesan shavings", "image": "/images/prosciutto.jpg", "restaurantId": 1 }
-  ]
+  "cart": []
 }
