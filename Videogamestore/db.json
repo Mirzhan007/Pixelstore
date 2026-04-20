@@ -6,7 +6,34 @@
       "genre": "Adventure",
       "description": "Erkunde eine riesige offene Welt und löse antike Rätsel.",
       "price": 59.99,
-      "image": "..."
+      "image": "public/images/the-legend-of-zelda.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Super Mario Oddysey",
+      "genre": "Action",
+      "description": "Reise mit Mario durch mehrere Level und gewinne Monde um Bowser zu besiegen.",
+      "price": 59.99,
+      "image": "public/images/mario-odyssey.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Monster Hunter World",
+      "genre": "Action",
+      "description": "Kämpfe alleine oder in einem Team mit bis zu 4 Leuten zusammen, um gegen Monster anzutreten um das Geheimnis der Insel zu erfahren.",
+      "price": 19.99,
+      "image": "public/images/monster-hunter-world.jpg"
     }
-  ]
+  ],
+  "cart": [
+    {
+      "title": "The Legend of Zelda",
+      "genre": "Adventure",
+      "description": "Erkunde eine riesige offene Welt und löse antike Rätsel.",
+      "price": 59.99,
+      "image": "public/images/the-legend-of-zelda.jpg",
+      "id": "5rMosA9TofY"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -11,6 +11,9 @@ export default defineConfig({
     },
   },
   server: {
+    watch: {
+      ignored: ['**/db.json'] // Sagt Vite: "Ignoriere diese Datei beim Neuladen!"
+    },
     proxy: {
       "/api": {
         target: "http://localhost:3001",

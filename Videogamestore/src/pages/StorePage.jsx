@@ -1,39 +1,46 @@
-import { useState, useEffect } from "react"
-import { getMenuItems } from "@/api/restaurants"
-import MenuItemCard from "@/components/MenuItemCard"
+import React from 'react';
+import MenuItemCard from '@/components/MenuItemCard';
 
-function StorePage() {
-  const [menuItems, setMenuItems] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    getMenuItems(1)
-      .then(setMenuItems)
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
-  }, [])
-
-  if (error) return <p className="text-destructive">Error: {error}</p>
+export default function StorePage({ games, onAdd, onSelectGame, error, onError }) {
+  // Wenn die Spiele noch nicht geladen sind, zeige eine Lade-Nachricht
+  if (!games || games.length === 0) {
+    return <p className="text-slate-500 p-8">Spiele werden geladen...</p>;
+  }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-4xl font-bold">Spenger Pizza</h2>
-        <p className="text-lg text-muted-foreground">Spengergasse 1, 1050 Wien</p>
-      </div>
+      <div className="animate-in fade-in duration-300">
+        <h2 className="text-3xl font-black mb-8 text-slate-800 uppercase tracking-tight">
+          Alle Games
+        </h2>
 
-      {loading ? (
-        <p className="text-muted-foreground">Laden...</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {menuItems.map((item) => (
-            <MenuItemCard key={item.id} item={item} />
+        {/* Positive Fehlerkultur (Anzeige von Fehlern wie dem Glurak-Witz) */}
+        {error && (
+            <div className="bg-amber-100 border-l-4 border-amber-500 p-4 mb-6 text-amber-900 flex justify-between rounded shadow-sm">
+              <span className="font-medium">{error}</span>
+              <button onClick={() => onError(null)}>✕</button>
+            </div>
+        )}
+
+        {/* Das Grid-Layout für die Spiele */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {games.map(game => (
+              <div
+                  key={game.id}
+                  onClick={() => onSelectGame(game)}
+                  className="cursor-pointer transform hover:-translate-y-1 transition-transform"
+              >
+                {/* Unsere Spiele-Karte */}
+                <MenuItemCard
+                    item={game}
+                    onAdd={(e) => {
+                      // Verhindert, dass sich die Detailseite öffnet, wenn man nur auf "Kaufen" klickt
+                      if (e && e.stopPropagation) e.stopPropagation();
+                      onAdd(game);
+                    }}
+                />
+              </div>
           ))}
         </div>
-      )}
-    </div>
-  )
+      </div>
+  );
 }
-
-export default StorePage

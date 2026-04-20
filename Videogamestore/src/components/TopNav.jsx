@@ -1,53 +1,58 @@
-import { Link } from "react-router"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu"
-import { Search, User, UtensilsCrossed, PanelLeft } from "lucide-react"
+import React from 'react';
+import { Button } from "@/components/ui/button";
 
-function TopNav({ onToggleSidebar }) {
+export default function TopNav({ cartCount, user, onLogout, currentPage, setCurrentPage }) {
   return (
-    <header className="flex h-20 items-center justify-between border-b px-6 gap-4">
-      {/* Left: toggle button + mobile logo */}
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" onClick={onToggleSidebar}>
-          <PanelLeft className="size-5" />
-        </Button>
-        <Link to="/" className="flex items-center gap-2 font-bold text-lg md:hidden">
-          <UtensilsCrossed className="size-5" />
-          SpengerBite
-        </Link>
-      </div>
+      <header className="flex h-20 items-center justify-between border-b px-6 bg-slate-900 text-white shadow-md">
 
-      {/* Center: search (hidden on small screens) */}
-      <div className="hidden sm:flex flex-1 max-w-[75%]">
-        <div className="relative w-full">
-          <Search className="absolute left-3 top-3.5 size-7 text-muted-foreground" />
-          <Input placeholder="Search menu..." className="pl-12 h-14 !text-2xl" />
+        {/* Das Logo (Klickbar, führt zum Shop) */}
+        <div className="flex items-center gap-4">
+          <h1
+              className="text-2xl font-black text-indigo-400 cursor-pointer"
+              onClick={() => setCurrentPage('shop')}
+          >
+            🕹️ PixelStore
+          </h1>
         </div>
-      </div>
 
-      {/* Right: user avatar */}
-      <DropdownMenu>
-        <DropdownMenuTrigger className="outline-none">
-          <Avatar className="size-10 cursor-pointer">
-            <AvatarFallback>
-              <User className="size-6" />
-            </AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem disabled>Profile (coming soon)</DropdownMenuItem>
-          <DropdownMenuItem disabled>Logout</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </header>
-  )
+        {/* Die Menü-Buttons */}
+        <div className="flex items-center gap-6">
+
+          {/* SHOP BUTTON */}
+          <Button
+              variant="ghost"
+              className={`text-lg font-bold transition-colors hover:text-indigo-400 hover:bg-slate-800 ${currentPage === 'shop' ? 'text-indigo-400' : 'text-slate-300'}`}
+              onClick={() => setCurrentPage('shop')}
+          >
+            Shop
+          </Button>
+
+          {/* WARENKORB BUTTON */}
+          <Button
+              variant="ghost"
+              className={`text-lg font-bold flex gap-2 transition-colors hover:text-indigo-400 hover:bg-slate-800 ${currentPage === 'cart' ? 'text-indigo-400' : 'text-slate-300'}`}
+              onClick={() => setCurrentPage('cart')}
+          >
+            Warenkorb
+            {/* Runder Zähler für die Anzahl der Spiele */}
+            <span className="bg-indigo-600 text-white px-2 py-0.5 rounded-full text-xs font-black">
+            {cartCount}
+          </span>
+          </Button>
+
+          <div className="h-8 w-[1px] bg-slate-700 mx-2" />
+
+          {/* NUTZER & LOGOUT */}
+          <div className="flex items-center gap-3">
+          <span className="text-green-400 font-bold">
+            {user ? `● ${user.name}` : ''}
+          </span>
+            <Button variant="outline" size="sm" onClick={onLogout} className="text-black border-none hover:bg-slate-200 font-bold">
+              Logout
+            </Button>
+          </div>
+
+        </div>
+      </header>
+  );
 }
-
-export default TopNav
